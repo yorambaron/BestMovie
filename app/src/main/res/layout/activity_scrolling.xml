@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    android:id="@+id/scroll_root_id1"
+    tools:context="com.yboweb.bestmovie.ScrollingActivity">
+
+
+    <ScrollView android:layout_height="fill_parent"
+
+          android:background="@color/black"
+        android:layout_width="fill_parent" >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_width="match_parent"
+
+
+        android:id="@+id/scroll_root_id">
+
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="wrap_content"
+            android:layout_height="192dp"
+
+            android:id="@+id/scroll_detail_id" >
+        </android.support.v4.view.ViewPager>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/light_gray"
+            android:paddingLeft="10px"
+
+            android:id="@+id/my_title" >
+        </TextView>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="10px"
+
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:id="@+id/rating"
+                />
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+                android:paddingLeft="10px"
+            android:id="@+id/genres"
+                android:textColor="@color/white"
+            />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/runtime"
+                android:paddingLeft="5px"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10px"
+            android:textColor="@color/white"
+            android:id="@+id/overview"
+            />
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="wrap_content"
+            android:layout_height="190dp"
+
+            android:id="@+id/video_pager_id" >
+        </android.support.v4.view.ViewPager>
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="wrap_content"
+            android:layout_height="190dp"
+
+            android:id="@+id/movie_actors_id" >
+        </android.support.v4.view.ViewPager>
+
+    </LinearLayout>
+
+    </ScrollView>
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <ProgressBar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/detail_progress_bar"/>
+        <ProgressBar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
+
+            android:visibility="invisible"
+            android:id="@+id/get_detetail_progress_bar"/>
+
+
+    </LinearLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>
