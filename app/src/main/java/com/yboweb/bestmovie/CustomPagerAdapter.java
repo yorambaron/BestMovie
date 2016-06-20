@@ -154,6 +154,7 @@ class CustomPagerAdapter extends PagerAdapter {
      else {  Log.d("CustomPage", "else");
             itemView = mLayoutInflater.inflate(R.layout.image_item_layout, container, false);
             imageView  = (ImageView) itemView.findViewById(R.id.my_item_image);
+            mGridData.get(position).setImageView(imageView);
             Picasso.with(mContext).load(imageUrl).into(imageView);
         }
 
