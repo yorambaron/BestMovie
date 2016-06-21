@@ -73,6 +73,8 @@ public class GetDetails extends AsyncTask<ImagesObject  , Void, RowImagesOutputD
 
             JSONObject node = new JSONObject(bufferRead.toString());
             String imdbId = node.getString(IMDB_ID);
+
+            ScrollingActivity.setId(imdbId);
             /* String queryURL = "http://www.omdbapi.com/?i=" + imdbId + "&plot=short&r=json"; */
             String queryURL = imdbConstObject.getDetailsUrl(imdbId);
 
