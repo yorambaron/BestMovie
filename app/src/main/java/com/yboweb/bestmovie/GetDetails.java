@@ -74,7 +74,7 @@ public class GetDetails extends AsyncTask<ImagesObject  , Void, RowImagesOutputD
             JSONObject node = new JSONObject(bufferRead.toString());
             String imdbId = node.getString(IMDB_ID);
 
-            ScrollingActivity.setId(imdbId);
+
             /* String queryURL = "http://www.omdbapi.com/?i=" + imdbId + "&plot=short&r=json"; */
             String queryURL = imdbConstObject.getDetailsUrl(imdbId);
 
@@ -98,6 +98,9 @@ public class GetDetails extends AsyncTask<ImagesObject  , Void, RowImagesOutputD
             String rated = getValueIfExists(nodeDetails, RATED, "0");
            // String videoAray = nodeDetails.getString(RATED);
 
+            ScrollingActivity.setId(imdbId);
+            if(title != null)
+                ScrollingActivity.setTitle(title);
             Log.d("DEBUG", "year:" + year);
             //Log.d("DEBUG", "release_date:" + release_date);
             Log.d("DEBUG", "genres:" + genres);
