@@ -51,6 +51,7 @@ public class ScrollingActivity extends AppCompatActivity {
     private String imagesList;
     private Activity activity = this;
     private static String  omdbId = null;
+    private static String  shareTitle = null;
 
 
     @Override
@@ -183,6 +184,10 @@ public class ScrollingActivity extends AppCompatActivity {
          omdbId =  id;
     }
 
+    public static void setTitle(String title) {
+        shareTitle =  title;
+    }
+
     void setGridData() {
         mViewPager.setAdapter(mGridAdapter);
         mGridAdapter.set_propop(0.9f);
@@ -310,8 +315,8 @@ public class ScrollingActivity extends AppCompatActivity {
 
         sharingIntent.setAction(Intent.ACTION_SEND);
         sharingIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Come see: " + title + " at: http://www.imdb.com/title/" + omdbId );
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Great movie: " + title);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Come see: " + shareTitle + " at: http://www.imdb.com/title/" + omdbId );
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Great movie: " + shareTitle);
 
 
         sharingIntent.setType("image/*");
