@@ -23,15 +23,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.javacodegeeks.androidnavigationdrawerexample.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -117,16 +117,15 @@ public class ScrollingActivity extends AppCompatActivity {
 
 
         if(mapString != null && imagesList != null) {
-            try {
+
 
                 // We have the data in memory (favorites).
                 // This part draws the horizontal picture images
-                JSONArray jsonArray = new JSONArray(imagesList);
 
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject object = jsonArray.getJSONObject(i);
-                    String fullImageURL = object.getString("image");
 
+                List<String> items = Arrays.asList(imagesList.split("\\s*,\\s*"));
+                for (int i = 0; i < items.size(); i++) {
+                    String fullImageURL = items.get(i);
                     ImageItem item = new ImageItem();
                     item.setImage(fullImageURL);
                     item.setTitle("title");
@@ -147,16 +146,12 @@ public class ScrollingActivity extends AppCompatActivity {
                 GetDetails getDetails = new GetDetails();
                 HashMap<String,String> map = new Gson().fromJson(mapString, new TypeToken<HashMap<String, String>>() {
                 }.getType());
-                Log.d("Scrolling", "Number of items:" + jsonArray.length());
+                Log.d("Scrolling", "Number of items:" + items.size());
                 LinearLayout layout = (LinearLayout) activity.findViewById(R.id.scroll_root_id);
 
                 // This part draws the rest of the page.
-                getDetails.drawDetails(layout, this, map, jsonArray.length(), jsonArray);
+                getDetails.drawDetails(layout, this, map, items.size(), items);
 
-            } catch (JSONException e) {
-                    Log.e("JSON: ", e.getMessage(), e);
-                    e.printStackTrace();
-                }
 
 
 
@@ -217,6 +212,7 @@ public class ScrollingActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         int id = item.getItemId();
+
         if(id == R.id.share) {
 
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -225,7 +221,8 @@ public class ScrollingActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
         }
-        if (id == R.id.save) {
+
+        if (id == R.id.favorite) {
 
             ArrayList<ImageItem> mGridData  = mGridAdapter.getData();
             Log.d("Action", "Got save");
@@ -241,20 +238,14 @@ public class ScrollingActivity extends AppCompatActivity {
             }.getType());
             Log.d("Action", "Succeeded?");
 
-    
-            String imagesString = new Gson().toJson(mGridData);
-            try {
-                JSONArray jsonArray = new JSONArray(imagesString);
 
-
-                Log.d("Action", "passed reading grid data");
-
-
-            }   catch (JSONException e) {
-
-                e.printStackTrace();
+            String imagesString = "";
+            for(int i = 0; i < mGridData.size(); i++) {
+                if(i == 0)
+                    imagesString =  mGridData.get(i).getImage() ;
+                else
+                    imagesString = imagesString + "," +  mGridData.get(i).getImage();
             }
-
 
 
             Log.d("Action", "Image Length: " + String.valueOf(size));
