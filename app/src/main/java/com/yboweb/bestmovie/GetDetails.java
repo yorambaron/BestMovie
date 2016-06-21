@@ -272,7 +272,7 @@ public class GetDetails extends AsyncTask<ImagesObject  , Void, RowImagesOutputD
         return(null);
     }
 
-    public void drawDetails(LinearLayout layout, Activity myActivity, Map<String, String> myCurrentMap, final int numImages, final JSONArray jsonArray) {
+    public void drawDetails(LinearLayout layout, Activity myActivity, Map<String, String> myCurrentMap, final int numImages, final List<String> imageList) {
 
 
         ViewPager mViewPager = (ViewPager) myActivity.findViewById(R.id.video_pager_id);
@@ -282,7 +282,7 @@ public class GetDetails extends AsyncTask<ImagesObject  , Void, RowImagesOutputD
         //header
         drawHeaderFields(myCurrentMap, myActivity);
         //Prepare gallery
-        prepareGalery(numImages, jsonArray, mGridAdapter);
+        prepareGalery(numImages, imageList, mGridAdapter);
         //Prepare video list
         prepareVideoList(myCurrentMap, mGridAdapter);
         // Prepare gallery and video in one PageView
@@ -415,7 +415,7 @@ public class GetDetails extends AsyncTask<ImagesObject  , Void, RowImagesOutputD
 
     }
 
-    private void prepareGalery(int numImages, JSONArray jsonArray, CustomPagerAdapter mGridAdapter) {
+    private void prepareGalery(int numImages, List<String>  imageList, CustomPagerAdapter mGridAdapter) {
         if(numImages > 0) {
             Integer index = 1;
             if (numImages == 1)
@@ -425,18 +425,11 @@ public class GetDetails extends AsyncTask<ImagesObject  , Void, RowImagesOutputD
             ImdbConstants imdbConstants = ImdbConstants.getInstance();
             String fullImageUrl = null;
 
-            if (jsonArray != null) {
+            if (imageList != null) {
                 // Favorite (data comes from memory)
-                try {
-                    String tmp = jsonArray.get(index).toString();
-                    JSONObject j = new JSONObject(tmp);
-                    // We already have the full URLs.
-                    fullImageUrl = j.getString("image");
-                    Log.d("GetDetails:", "Favorite: Image string:" + jsonArray.toString());
-                } catch (JSONException e) {
-                    Log.e("JSON: ", e.getMessage(), e);
-                    e.printStackTrace();
-                }
+                 fullImageUrl  = imageList.get(index);
+
+
             } else {
                 name = savedImages.get(index);
                 fullImageUrl = imdbConstants.getOneImage(name, "w342");
@@ -445,14 +438,11 @@ public class GetDetails extends AsyncTask<ImagesObject  , Void, RowImagesOutputD
 
             String imagesString = null;
 
-            if (jsonArray != null) {
+            if (imageList != null) {
                 // The image that we have is full name and not with the right size.
                 // We need to create a coma separated names that GridviewActivity can handle
                 for (int i = 0; i < numImages; i++) {
-                    try {
-                        String tmp = jsonArray.get(i).toString();
-                        JSONObject j = new JSONObject(tmp);
-                        String fullUrl = j.getString("image");
+                        String fullUrl = imageList.get(i);
                         int loc = fullUrl.lastIndexOf('/');
                         String privateName = fullUrl.substring(loc);
                         if (imagesString == null)
@@ -460,15 +450,7 @@ public class GetDetails extends AsyncTask<ImagesObject  , Void, RowImagesOutputD
                         else
                             imagesString = imagesString + privateName;
                         if (i != numImages - 1)
-                            imagesString = imagesString + ",";
-
-
-                    } catch (JSONException e) {
-                        Log.e("JSON: ", e.getMessage(), e);
-                        e.printStackTrace();
-                    }
-
-
+                           imagesString = imagesString + ",";
                 }
                 imagesString = "[" + imagesString + "]";
                 Log.d("Scrolling", "Full favorite:" + imagesString);
