@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -5,15 +6,16 @@
 
 
     <item
-        android:id="@+id/save"
+        android:id="@+id/favorite"
         android:title=""
-        android:icon="@drawable/yellostar1"
+        android:icon="@drawable/favorite"
         app:showAsAction="always"/>
     <item
         android:id="@+id/share"
-        android:title="Share"
+        android:title=""
+        android:icon="@drawable/share"
         app:showAsAction="always"
-    android:actionProviderClass=
-    "android.widget.ShareActionProvider"/>
+
+    />
 
 </menu>
