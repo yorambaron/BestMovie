@@ -9,7 +9,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
-import com.javacodegeeks.androidnavigationdrawerexample.R;
+import com.yboweb.bestmovie.androidnavigationdrawerexample.R;
 
 /**
  * Created by test on 05/03/16.

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.javacodegeeks.androidnavigationdrawerexample.R;
+import com.yboweb.bestmovie.androidnavigationdrawerexample.R;
 
 public class SearchableActivity extends AppCompatActivity {
 

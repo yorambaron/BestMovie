@@ -10,7 +10,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.javacodegeeks.androidnavigationdrawerexample.R;
+import com.yboweb.bestmovie.androidnavigationdrawerexample.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
