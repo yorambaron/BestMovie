@@ -30,7 +30,9 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.javacodegeeks.androidnavigationdrawerexample.R;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.yboweb.bestmovie.androidnavigationdrawerexample.R;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -66,6 +68,10 @@ public class AndroidNavDrawerActivity extends ActionBarActivity
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
+
+            // Initialize the SDK before executing any other operations,
+            FacebookSdk.sdkInitialize(getApplicationContext());
+//            AppEventsLogger.activateApp(this);
 
             // Change the arrow icon to the standard menu
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_hamburger);
