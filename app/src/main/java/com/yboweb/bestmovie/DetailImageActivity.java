@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.javacodegeeks.androidnavigationdrawerexample.R;
+import com.yboweb.bestmovie.androidnavigationdrawerexample.R;
 import com.squareup.picasso.Picasso;
 
 
