@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.javacodegeeks.androidnavigationdrawerexample.R;
+import com.yboweb.bestmovie.androidnavigationdrawerexample.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
