@@ -25,8 +25,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "imdb4.db";
-    public static final String IMDB_TABLE = "imdb6";
+    private static final String DATABASE_NAME = "imdb10.db";
+    public static final String IMDB_TABLE = "imdb10";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_MAP = "map";
     public static final String COLUMN_IMAGES = "images";
