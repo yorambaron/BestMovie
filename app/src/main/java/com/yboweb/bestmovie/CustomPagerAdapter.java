@@ -81,24 +81,30 @@ class CustomPagerAdapter extends PagerAdapter {
             }
 
         } else if (type == ImageItem.ACTOR_ITEM) {
-            Log.d("CustomPage", " Type:" + type + " actorsJson:" + actorsJson);
+
+
             itemView = mLayoutInflater.inflate(R.layout.actor_name, container, false);
             imageView = (ImageView) itemView.findViewById(R.id.my_actor_item_image);
             TextView title = (TextView) itemView.findViewById(R.id.my_actor_item_title);
-            title.setText(mGridData.get(position).gettTitle());
-            imageView.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
 
-                    Bundle mBundle = new Bundle();
-                    mBundle.putString("combined", actorsJson);
-                    Intent mIntent = new Intent(mContext, ActorScrollingActivity.class);
-                    mIntent.putExtras(mBundle);
 
-                    mContext.startActivity(mIntent);
+                title.setText(mGridData.get(position).gettTitle());
+                Picasso.with(mContext).load(imageUrl).into(imageView);
+                title.setText(mGridData.get(position).gettTitle());
 
-                }
-            });
-            Picasso.with(mContext).load(imageUrl).into(imageView);
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                        Bundle mBundle = new Bundle();
+                        mBundle.putString("combined", actorsJson);
+                        Intent mIntent = new Intent(mContext, ActorScrollingActivity.class);
+                        mIntent.putExtras(mBundle);
+
+                        mContext.startActivity(mIntent);
+
+                    }
+                });
+
 
 
         } else if (type == ImageItem.VIDEO_ITEM) {
