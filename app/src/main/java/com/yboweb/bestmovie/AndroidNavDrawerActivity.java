@@ -1,11 +1,14 @@
 package com.yboweb.bestmovie;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
@@ -30,6 +33,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.yboweb.bestmovie.androidnavigationdrawerexample.R;
@@ -62,6 +66,7 @@ public class AndroidNavDrawerActivity extends ActionBarActivity
 
         static  VerticalAdapter mGridAdapter;
         static private ArrayList<ImageItem> mGridData;
+    private   CallbackManager callbackManager;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +74,14 @@ public class AndroidNavDrawerActivity extends ActionBarActivity
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 
+            // ifyStoragePermissions(this);
             // Initialize the SDK before executing any other operations,
-            FacebookSdk.sdkInitialize(getApplicationContext());
-//            AppEventsLogger.activateApp(this);
+           FacebookSdk.sdkInitialize(getApplicationContext());
+
+            verifyStoragePermissions(this);
+
+            // callbackManager = CallbackManager.Factory.create();
+           AppEventsLogger.activateApp(this);
 
             // Change the arrow icon to the standard menu
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_hamburger);
@@ -125,6 +135,11 @@ public class AndroidNavDrawerActivity extends ActionBarActivity
         }
 
 
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
 
         /**
          * Parsing the feed results and get the list
@@ -546,6 +561,27 @@ public class AndroidNavDrawerActivity extends ActionBarActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
+
+    public  void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        final int REQUEST_EXTERNAL_STORAGE = 1;
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+
+
+        String[] PERMISSIONS_STORAGE = {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+        }
 
 
 }
