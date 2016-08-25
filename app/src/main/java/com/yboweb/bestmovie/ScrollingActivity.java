@@ -21,10 +21,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.facebook.share.ShareApi;
-import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
-import com.facebook.share.widget.ShareDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yboweb.bestmovie.androidnavigationdrawerexample.R;
@@ -221,12 +219,12 @@ public class ScrollingActivity extends AppCompatActivity {
 
         if(id == R.id.share) {
 
-            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-            prepareShareIntent(sharingIntent);
+
+            prepareShareIntent();
 
 
 
-            startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            //startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
         }
 
@@ -291,14 +289,19 @@ public class ScrollingActivity extends AppCompatActivity {
         return (topLinearLayout);
     }
 
-    public void  prepareShareIntent(Intent sharingIntent) {
+    public void  prepareShareIntent() {
         // Fetch Bitmap Uri locally
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
 
         ImageView imageX = mGridAdapter.getData().get(0).getImageVIew();
         Bitmap bmp = ((BitmapDrawable) imageX.getDrawable()).getBitmap();
 
+
         Uri bmpUri = null;
         try {
+
+            // AndroidNavDrawerActivity.verifyStoragePermissions();
             File file =  new File(Environment.getExternalStoragePublicDirectory(
                     Environment.DIRECTORY_DOWNLOADS), "share_image_" + System.currentTimeMillis() + ".png");
             file.getParentFile().mkdirs();
@@ -310,7 +313,6 @@ public class ScrollingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // Construct share intent as described above based on bitmap
 
         sharingIntent.setAction(Intent.ACTION_SEND);
         sharingIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
@@ -320,15 +322,20 @@ public class ScrollingActivity extends AppCompatActivity {
 
         sharingIntent.setType("image/*");
 
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
 
+/*
         SharePhoto photo = new SharePhoto.Builder()
                 .setBitmap(bmp)
                 .build();
         SharePhotoContent content = new SharePhotoContent.Builder()
                 .addPhoto(photo)
                 .build();
-
+*/
+        
+        // Log.d("ShareDialog", "Sharing to Facebook" + Settings.getApplicationSignature(activity));
+        /*
         ShareDialog shareDialog = new ShareDialog(this);
         if (ShareDialog.canShow(ShareLinkContent.class)) {
             ShareLinkContent linkContent = new ShareLinkContent.Builder()
@@ -338,8 +345,9 @@ public class ScrollingActivity extends AppCompatActivity {
                     .setContentUrl(Uri.parse("http://developers.facebook.com/android"))
                     .build();
 
-            shareDialog.show(linkContent);
+            shareDialog.show(linkContent, ShareDialog.Mode.NATIVE);
         }
+        */
 
     }
 
